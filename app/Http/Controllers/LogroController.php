@@ -2,65 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Logro;
 use App\Http\Requests\StoreLogroRequest;
 use App\Http\Requests\UpdateLogroRequest;
-use App\Models\Logro;
+use Illuminate\Http\Response;
 
 class LogroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(Logro::all(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreLogroRequest $request)
     {
-        //
+        $logro = Logro::create($request->validated());
+        return response()->json($logro, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Logro $logro)
     {
-        //
+        return response()->json($logro, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Logro $logro)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateLogroRequest $request, Logro $logro)
     {
-        //
+        $logro->update($request->validated());
+        return response()->json($logro, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Logro $logro)
     {
-        //
+        $logro->delete();
+        return response()->json(null, 204);
     }
 }

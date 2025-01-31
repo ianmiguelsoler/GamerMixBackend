@@ -2,65 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Galeria;
 use App\Http\Requests\StoreGaleriaRequest;
 use App\Http\Requests\UpdateGaleriaRequest;
-use App\Models\Galeria;
+use Illuminate\Http\Response;
 
 class GaleriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(Galeria::all(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreGaleriaRequest $request)
     {
-        //
+        $galeria = Galeria::create($request->validated());
+        return response()->json($galeria, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Galeria $galeria)
     {
-        //
+        return response()->json($galeria, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Galeria $galeria)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateGaleriaRequest $request, Galeria $galeria)
     {
-        //
+        $galeria->update($request->validated());
+        return response()->json($galeria, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Galeria $galeria)
     {
-        //
+        $galeria->delete();
+        return response()->json(null, 204);
     }
 }

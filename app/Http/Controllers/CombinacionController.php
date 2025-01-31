@@ -2,65 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Combinacion;
 use App\Http\Requests\StoreCombinacionRequest;
 use App\Http\Requests\UpdateCombinacionRequest;
-use App\Models\Combinacion;
+use Illuminate\Http\Response;
 
 class CombinacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(Combinacion::all(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCombinacionRequest $request)
     {
-        //
+        $combinacion = Combinacion::create($request->validated());
+        return response()->json($combinacion, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Combinacion $combinacion)
     {
-        //
+        return response()->json($combinacion, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Combinacion $combinacion)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateCombinacionRequest $request, Combinacion $combinacion)
     {
-        //
+        $combinacion->update($request->validated());
+        return response()->json($combinacion, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Combinacion $combinacion)
     {
-        //
+        $combinacion->delete();
+        return response()->json(null, 204);
     }
 }

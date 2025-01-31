@@ -2,65 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Skin;
 use App\Http\Requests\StoreSkinRequest;
 use App\Http\Requests\UpdateSkinRequest;
-use App\Models\Skin;
+use Illuminate\Http\Response;
 
 class SkinController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(Skin::all(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreSkinRequest $request)
     {
-        //
+        $skin = Skin::create($request->validated());
+        return response()->json($skin, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Skin $skin)
     {
-        //
+        return response()->json($skin, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Skin $skin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateSkinRequest $request, Skin $skin)
     {
-        //
+        $skin->update($request->validated());
+        return response()->json($skin, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Skin $skin)
     {
-        //
+        $skin->delete();
+        return response()->json(null, 204);
     }
 }

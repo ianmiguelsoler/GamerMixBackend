@@ -2,65 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Elemento;
 use App\Http\Requests\StoreElementoRequest;
 use App\Http\Requests\UpdateElementoRequest;
-use App\Models\Elemento;
+use Illuminate\Http\Response;
 
 class ElementoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(Elemento::all(), 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreElementoRequest $request)
     {
-        //
+        $elemento = Elemento::create($request->validated());
+        return response()->json($elemento, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Elemento $elemento)
     {
-        //
+        return response()->json($elemento, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Elemento $elemento)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateElementoRequest $request, Elemento $elemento)
     {
-        //
+        $elemento->update($request->validated());
+        return response()->json($elemento, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Elemento $elemento)
     {
-        //
+        $elemento->delete();
+        return response()->json(null, 204);
     }
 }
