@@ -6,8 +6,20 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Logro;
 
+/**
+ * Class LogroUsuarioSeeder
+ *
+ * Seeder para asignar logros a los usuarios.
+ *
+ * @package Database\Seeders
+ */
 class LogroUsuarioSeeder extends Seeder
 {
+    /**
+     * Ejecuta el seeder de relación entre usuarios y logros.
+     *
+     * @return void
+     */
     public function run(): void
     {
         // Obtener todos los usuarios y logros
